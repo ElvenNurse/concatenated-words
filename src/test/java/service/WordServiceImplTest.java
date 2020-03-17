@@ -26,14 +26,24 @@ public class WordServiceImplTest {
         Assert.assertTrue(concatenatedWords.containsKey("catdog"));
         Assert.assertTrue(concatenatedWords.containsKey("dogcat"));
         Assert.assertTrue(concatenatedWords.containsKey("adogbcat"));
-        Assert.assertFalse(concatenatedWords.containsKey("a"));
-        Assert.assertFalse(concatenatedWords.containsKey("b"));
-        Assert.assertFalse(concatenatedWords.containsKey("cat"));
-        Assert.assertFalse(concatenatedWords.containsKey("dog"));
+        Assert.assertEquals(4, concatenatedWords.size());
     }
 
     @Test
-    public void findLongestConcatenatedWord() {
+    public void findLongestConcatenatedWord_lettersOnly() {
+        Map<String, Integer> concatenatedWords = new HashMap<>();
+        concatenatedWords.put("abcdefghi", 9);
+        concatenatedWords.put("abcdefg", 7);
+        concatenatedWords.put("abcde", 5);
+        concatenatedWords.put("abc", 3);
+        concatenatedWords.put("a", 1);
+
+        Assert.assertEquals(Map.entry("abcdefghi", 9),
+                wordService.findLongestConcatenatedWord(concatenatedWords));
+    }
+
+    @Test
+    public void findLongestConcatenatedWord_digitsOnly() {
         Map<String, Integer> concatenatedWords = new HashMap<>();
         concatenatedWords.put("123456789", 9);
         concatenatedWords.put("1234567", 7);
@@ -46,7 +56,20 @@ public class WordServiceImplTest {
     }
 
     @Test
-    public void findSecondLongestConcatenatedWord() {
+    public void findSecondLongestConcatenatedWord_lettersOnly() {
+        Map<String, Integer> concatenatedWords = new HashMap<>();
+        concatenatedWords.put("abcdefghi", 9);
+        concatenatedWords.put("abcdefg", 7);
+        concatenatedWords.put("abcde", 5);
+        concatenatedWords.put("abc", 3);
+        concatenatedWords.put("a", 1);
+
+        Assert.assertEquals(Map.entry("abcdefg", 7),
+                wordService.findSecondLongestConcatenatedWord(concatenatedWords));
+    }
+
+    @Test
+    public void findSecondLongestConcatenatedWord_digitsOnly() {
         Map<String, Integer> concatenatedWords = new HashMap<>();
         concatenatedWords.put("123456789", 9);
         concatenatedWords.put("1234567", 7);
